@@ -1,0 +1,72 @@
+{
+  "plugins": [
+    "eslint-plugin-import-helpers"
+  ],
+  "extends": [
+    "plugin:@tanstack/query/recommended",
+    "next/core-web-vitals",
+    "next",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "groups": [
+          "type",
+          "/^next$/",
+          "/^next//",
+          "/^react$/",
+          "/^next/",
+          "/^@testing/",
+          "/^@tanstack/",
+          "/^@chakra-ui/",
+          "/^react/",
+          "/clsx/",
+          "module",
+          "/interface/",
+          "/libs/",
+          "/routes/",
+          "/config/",
+          "/infra/",
+          "/modules/",
+          "/models/",
+          "/services/",
+          "/repositories/",
+          [
+            "/contexts/",
+            "/hooks/",
+            "/reducers/"
+          ],
+          "/components/Layouts/",
+          "/components/templates/",
+          "/components/Elements/",
+          "/components/atoms/",
+          "/components/Modules/",
+          "/components/molecules/",
+          "/components/Sections/",
+          "/components/organisms/",
+          "/viewModels/",
+          "/views/",
+          "/tests/",
+          "/utils/",
+          "/app/",
+          "/themes/",
+          [
+            "parent",
+            "sibling",
+            "index"
+          ],
+          "/assets/"
+        ],
+        "alphabetize": {
+          "order": "asc",
+          "ignoreCase": true
+        }
+      }
+    ]
+  }
+}

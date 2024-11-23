@@ -16,13 +16,13 @@ export default function Home() {
   return (
     <main className="w-full h-full">
       <HeaderWidgetLP />
-      <div className="w-[750px] min-h-[450px] h-full bg-[var(--color-white)] m-0 mx-auto rounded-lg shadow-sm p-8 mt-9">
+      <div className="w-full max-w-[750px] min-h-[450px] h-full lg:bg-[var(--color-white)] sm:bg-transparent md:bg-transparent m-2 mx-auto rounded-lg shadow-sm p-4 sm:p-6 md:p-8 mt-9 ">
         <IfRender condition={estimate.step === 0}>
           <FormRide />
         </IfRender>
 
         <IfRender condition={estimate.step === 1}>
-          <TravelOptions/>
+          <TravelOptions />
         </IfRender>
       </div>
       <ToastContainer />

@@ -8,6 +8,7 @@ import FormRide from "@/modules/Rides/ui/FormRide";
 import { IfRender, MapRender } from "@/utils/jsx";
 
 import { useRide } from "@/contexts/ride.context";
+import TravelOptions from "@/modules/Rides/ui/TravelOptions";
 
 export default function Home() {
   const { estimate } = useRide();
@@ -21,7 +22,7 @@ export default function Home() {
         </IfRender>
 
         <IfRender condition={estimate.step === 1}>
-          <div>Step 1</div>
+          <TravelOptions/>
         </IfRender>
       </div>
       <ToastContainer />

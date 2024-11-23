@@ -2,20 +2,17 @@ import { apiConfig } from "@/config/api.config";
 import { api } from "@/libs/axios/api-client.lib";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import {
-  IEstimateRide,
-  IRideLocalStorage,
-} from "@/modules/Rides/interface/ride.interface";
+import { IRideBody } from "@/modules/Rides/interface/ride.interface";
 
-const createEstimateRide = async (values: IEstimateRide) => {
-  const { data } = await api.post(apiConfig.routes.drivers.create, values);
+const patchConfirmRide = async (values: IRideBody) => {
+  const { data } = await api.patch(apiConfig.routes.drivers.patch, values);
   return data;
 };
 
-export const useCreateEstimateRide = () => {
+export const usePatchConfirmRide = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: createEstimateRide,
+    mutationFn: patchConfirmRide,
     onSettled: () => {
       queryClient.invalidateQueries({
         queryKey: ["rides-list"],

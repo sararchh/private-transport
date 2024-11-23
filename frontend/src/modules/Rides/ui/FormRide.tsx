@@ -27,8 +27,7 @@ const FormRide: React.FC = () => {
     error: IError | null | any;
   } = useCreateEstimateRide();
 
-
-  const { estimate, handleSetEstimate } = useRide();
+  const { handleSetEstimate } = useRide();
 
   const {
     register,
@@ -55,7 +54,6 @@ const FormRide: React.FC = () => {
   return (
     <>
       <Text textStyle="2xl" fontWeight="600" marginBottom="1.2rem">
-        {" "}
         Solicitação de viagem
       </Text>
 

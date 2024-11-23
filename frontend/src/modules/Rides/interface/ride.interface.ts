@@ -57,6 +57,8 @@ export interface IError {
 
 export interface IRideLocalStorage {
   step: number;
+  origin?: string;
+  destination?: string;
   estimate?: IEstimate;
   customer_id?: string;
 }

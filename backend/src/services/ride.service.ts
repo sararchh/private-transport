@@ -80,7 +80,7 @@ async function confirm(rideBody: IRideBody): Promise<boolean> {
     throw notFoundDriver("Motorista não encontrado");
   }
 
-  if ((distance / 1000) < driverExists.min_km) {
+  if (distance / 1000 < driverExists.min_km) {
     throw invalidDistance("Quilometragem inválida para o motorista");
   }
 
@@ -101,10 +101,14 @@ async function find(
   customer_id: string,
   driver_id: number
 ): Promise<ICustomerRides> {
-  const driverExists = (await rideRepository.findDrivers(driver_id)) as IDriver;
+  if (driver_id) {
+    const driverExists = (await rideRepository.findDrivers(
+      driver_id
+    )) as IDriver;
 
-  if (!driverExists) {
-    throw invalidDriver("Motorista invalido");
+    if (!driverExists) {
+      throw invalidDriver("Motorista invalido");
+    }
   }
 
   const rides = await rideRepository.findRides(customer_id, driver_id);

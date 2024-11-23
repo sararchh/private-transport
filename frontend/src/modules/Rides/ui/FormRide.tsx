@@ -48,7 +48,13 @@ const FormRide: React.FC = () => {
       return;
     }
 
-    handleSetEstimate({ step: 1, estimate, customer_id: data.customer_id });
+    handleSetEstimate({
+      step: 1,
+      estimate,
+      customer_id: data.customer_id,
+      origin: data.origin,
+      destination: data.destination,
+    });
   };
 
   return (

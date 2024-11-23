@@ -1,9 +1,7 @@
 import React from "react";
 import { useRide } from "@/contexts/ride.context";
 
-import { Box, Button, Text } from "@chakra-ui/react";
-import { usePatchConfirmRide } from "../http/client/mutations/usePatchRide";
-import { IError, IRideBody } from "../interface/ride.interface";
+import { Box, Text } from "@chakra-ui/react";
 import ListDrivers from "./widgets/ListDrivers";
 
 function convertDuration(duration: string) {
@@ -15,21 +13,11 @@ function convertDuration(duration: string) {
 
 const TravelOptions: React.FC = () => {
   const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API_KEY as string;
-  const { estimate, handleSetEstimate } = useRide();
+  const { estimate } = useRide();
 
   const origin = `${estimate.estimate?.origin?.latitude},${estimate.estimate?.origin?.longitude}`;
   const destination = `${estimate.estimate?.destination?.latitude},${estimate.estimate?.destination?.longitude}`;
   const mapUrl = `https://maps.googleapis.com/maps/api/staticmap?size=600x400&path=color:blue|weight:5|${origin}|${destination}&markers=color:red|label:A|${origin}&markers=color:green|label:B|${destination}&key=${API_KEY}`;
-
-  const {
-    mutateAsync: createEstimateRide,
-    isError,
-    error,
-  }: {
-    mutateAsync: (values: IRideBody) => Promise<{ sucess: boolean }>;
-    isError: boolean;
-    error: IError | null | any;
-  } = usePatchConfirmRide();
 
   return (
     <>

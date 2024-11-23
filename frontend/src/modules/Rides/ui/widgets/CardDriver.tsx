@@ -28,13 +28,24 @@ const CardDriver: React.FC<{
           </span>
 
           <Box
-        display={{ base: "flex", sm: "flex", md: "flex", lg: "flex" }}
-        flexDirection={{ base: "column", sm: "column", md: "column", lg: "row" }}
-        gap={{ base: 1, sm: 1, md: 2, lg: 14 }}
-        alignItems={{ base: "start", sm: "start", md: "start", lg: "center" }}
-        mt={1}
-      >            <Text textStyle="sm">{driver.description}</Text>
-
+            display={{ base: "flex", sm: "flex", md: "flex", lg: "flex" }}
+            flexDirection={{
+              base: "column",
+              sm: "column",
+              md: "column",
+              lg: "row",
+            }}
+            gap={{ base: 1, sm: 1, md: 2, lg: 14 }}
+            alignItems={{
+              base: "start",
+              sm: "start",
+              md: "start",
+              lg: "center",
+            }}
+            mt={1}
+          >
+            {" "}
+            <Text textStyle="sm">{driver.description}</Text>
             <span className="flex flex-col lg:items-center md:items-start sm:items-start">
               <Text textStyle="lg" fontWeight="bold" color="orange.500">
                 R$ {driver.value.toFixed(2)}

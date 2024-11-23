@@ -24,6 +24,10 @@ export default function Home() {
         <IfRender condition={estimate.step === 1}>
           <TravelOptions />
         </IfRender>
+
+        <IfRender condition={estimate.step === 2}>
+          <p>Step 3</p>
+        </IfRender>
       </div>
       <ToastContainer />
     </main>

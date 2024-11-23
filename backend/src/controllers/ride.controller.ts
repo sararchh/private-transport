@@ -2,6 +2,7 @@ import { StatusCodes } from "http-status-codes";
 import { Request, Response } from "express";
 
 import rideService from "@/services/ride.service";
+import { invalidDataError } from "@/errors/ride.error";
 
 const estimate = async (req: Request, res: Response): Promise<Response> => {
   try {
@@ -23,7 +24,13 @@ const estimate = async (req: Request, res: Response): Promise<Response> => {
       return res.status(StatusCodes.NOT_FOUND).send(error);
     }
 
-    return res.status(StatusCodes.BAD_REQUEST).send(error);
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .send(
+        invalidDataError(
+          "Os dados fornecidos no corpo da requisição são inválidos"
+        )
+      );
   }
 };
 
@@ -65,7 +72,13 @@ const confirm = async (req: Request, res: Response): Promise<Response> => {
       return res.status(StatusCodes.NOT_ACCEPTABLE).send(error);
     }
 
-    return res.status(StatusCodes.BAD_REQUEST).send(error);
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .send(
+        invalidDataError(
+          "Os dados fornecidos no corpo da requisição são inválidos"
+        )
+      );
   }
 };
 
@@ -86,7 +99,13 @@ const find = async (req: Request, res: Response): Promise<Response> => {
       return res.status(StatusCodes.NOT_FOUND).send(error);
     }
 
-    return res.status(StatusCodes.BAD_REQUEST).send(error);
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .send(
+        invalidDataError(
+          "Os dados fornecidos no corpo da requisição são inválidos"
+        )
+      );
   }
 };
 

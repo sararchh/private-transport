@@ -1,5 +1,5 @@
 export const apiConfig = {
-   baseUrl: 'http://localhost:3000',
+   baseUrl: 'http://localhost:3001',
    routes: {
       drivers: {
          list: '/ride/:customer_id',

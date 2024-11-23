@@ -1,28 +1,63 @@
 import React from "react";
 import { Button, Text } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
+
 import InputCustom from "@/components/atoms/Input/Input";
 
-type FormValues = {
-  origin: string;
-  destination: string;
-  customer_id: string;
-};
+import { useCreateEstimateRide } from "../http/client/mutations/useCreateRide";
+
+import {
+  IError,
+  IEstimate,
+  IEstimateRide,
+  TFormValues,
+} from "../interface/ride.interface";
+import { toast } from "react-toastify";
+
+import { useRide } from "@/contexts/ride.context";
 
 const FormRide: React.FC = () => {
+  const {
+    mutateAsync: createEstimateRide,
+    isError,
+    error,
+  }: {
+    mutateAsync: (values: IEstimateRide) => Promise<IEstimate>;
+    isError: boolean;
+    error: IError | null | any;
+  } = useCreateEstimateRide();
+
+
+  const { estimate, handleSetEstimate } = useRide();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>();
+  } = useForm<TFormValues>();
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<TFormValues> = async (data) => {
+    if (data.destination.trim() === data.origin.trim()) {
+      toast.error("Origem e destino não podem ser iguais");
+      return;
+    }
+
+    const estimate = await createEstimateRide(data);
+
+    if (isError) {
+      toast.error(error.response.data.error_description);
+      return;
+    }
+
+    handleSetEstimate({ step: 1, estimate, customer_id: data.customer_id });
   };
 
   return (
     <>
-      <Text textStyle="2xl" fontWeight="600" marginBottom="1.2rem"> Solicitação de viagem</Text>
+      <Text textStyle="2xl" fontWeight="600" marginBottom="1.2rem">
+        {" "}
+        Solicitação de viagem
+      </Text>
 
       <form
         onSubmit={handleSubmit(onSubmit)}

@@ -60,7 +60,7 @@ async function findRides(
     `;
     let params: (string | number)[] = [customer_id];
 
-    if (driver_id !== undefined) {
+    if (typeof driver_id === 'number' && !isNaN(driver_id)) {
       query += ` AND rides.driver_id = ?`;
       params.push(driver_id);
     }

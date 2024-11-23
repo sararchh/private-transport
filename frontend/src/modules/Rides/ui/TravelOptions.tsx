@@ -4,6 +4,7 @@ import { useRide } from "@/contexts/ride.context";
 import { Box, Button, Text } from "@chakra-ui/react";
 import { usePatchConfirmRide } from "../http/client/mutations/usePatchRide";
 import { IError, IRideBody } from "../interface/ride.interface";
+import ListDrivers from "./widgets/ListDrivers";
 
 function convertDuration(duration: string) {
   const totalSeconds = parseInt(duration.replace("s", ""), 10);
@@ -54,6 +55,10 @@ const TravelOptions: React.FC = () => {
             ? convertDuration(estimate.estimate?.duration)
             : "N/A"}
         </Text>
+      </Box>
+
+      <Box>
+        <ListDrivers data={estimate.estimate?.options || []} />
       </Box>
     </>
   );

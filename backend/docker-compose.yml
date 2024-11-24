@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  node:
+    build: ./
+    image: taxi-backend
+    ports:
+      - 8080:8080
+    # environment:
+    depends_on:
+      - db
+    env_file:
+      - ./.env
+
+  db:
+    image: nouchka/sqlite3
+    volumes:
+      - ./data:/data

@@ -3,13 +3,9 @@ import { useRide } from "@/contexts/ride.context";
 
 import { Box, Text } from "@chakra-ui/react";
 import ListDrivers from "./widgets/ListDrivers";
+import { convertDuration } from "@/utils/convert-duration";
 
-function convertDuration(duration: string) {
-  const totalSeconds = parseInt(duration.replace("s", ""), 10);
-  const hours = Math.floor(totalSeconds / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  return `${hours}h ${minutes}m`;
-}
+
 
 const TravelOptions: React.FC = () => {
   const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API_KEY as string;

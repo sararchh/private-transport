@@ -8,7 +8,8 @@ export type TFormValues = {
 
 export type TFormValuesHistory = {
   customer_id: string;
-  driver: { items: { id: number; name: string, value: string }[] } | any;
+  driver_id: string;
+  driver?: { items: { id: number; name: string, value: string }[] } | any;
 };
 
 export interface IRideParams {
@@ -71,6 +72,7 @@ export interface IRideLocalStorage {
 export interface IRideBody {
   customer_id: string;
   origin: string;
+  date: string;
   destination: string;
   distance: number;
   duration: string;

@@ -1,27 +1,13 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import {
-  Button,
-  Text,
-  SelectContent,
-  SelectItem,
-  SelectLabel,
-  SelectRoot,
-  SelectTrigger,
-  SelectValueText,
-  createListCollection,
-} from "@chakra-ui/react";
-import { useForm, SubmitHandler, Controller, set } from "react-hook-form";
+import { Button, Text } from "@chakra-ui/react";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 import InputCustom from "@/components/atoms/Input/Input";
 
 import { useGetDrivers } from "../http/client/useGetDrivers";
 import { useGetRides } from "../http/client/useGetRides";
-import {
-  IDriver,
-  IError,
-  TFormValuesHistory,
-} from "../interface/ride.interface";
+import { IDriver, IError, TFormValuesHistory } from "../interface/ride.interface";
 import { IfRender, MapRender } from "@/utils/jsx";
 import ListRides from "./widgets/ListRides";
 
@@ -44,23 +30,11 @@ const RideHistory: React.FC = () => {
   const {
     register,
     handleSubmit,
-    control,
     formState: { errors },
   } = useForm<TFormValuesHistory>();
 
-  const frameworks = createListCollection({
-    items: [
-      { id: 0, name: "Todos", value: "Todos" },
-      ...(drivers || []).map((driver) => ({
-        id: driver.id,
-        name: driver.name,
-        value: driver.name,
-      })),
-    ],
-  });
-
   const onSubmit: SubmitHandler<TFormValuesHistory> = async (data) => {
-    const driver_id = data.driver.items[0].id;
+    const driver_id = parseInt(data.driver_id);
 
     setCustomerId(data.customer_id);
     if (driver_id === 0) {
@@ -81,7 +55,7 @@ const RideHistory: React.FC = () => {
         Histórico de viagens
       </Text>
 
-      <div className="relative w-full flex flex-col items-center ">
+      <div className="relative w-full flex flex-col items-center mb-11 ">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="w-full flex flex-col items-center"
@@ -96,41 +70,20 @@ const RideHistory: React.FC = () => {
             register={register("customer_id", { required: true, minLength: 1 })}
           />
 
-          <Controller
-            name="driver"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <SelectRoot
-                collection={frameworks}
-                size="sm"
-                width="100%"
-                {...field}
-                onValueChange={(value) => field.onChange(value)}
+          <div className="w-full">
+            <label className="font-semibold">Motorista</label>
+            <select
+                {...register("driver_id")}
+                className="w-full border border-gray-300 bg-transparent py-2 pl-2 text-left shadow-sm focus:outline-none sm:text-sm rounded-[5px]"
               >
-                <SelectLabel fontWeight="600">Motorista</SelectLabel>
-                <SelectTrigger
-                  width="100%"
-                  border="1px solid #6e6e6e60"
-                  outline="none"
-                  padding="0.5rem"
-                >
-                  <SelectValueText placeholder="Selecione um motorista" />
-                </SelectTrigger>
-                <SelectContent padding="0.5rem">
-                  {frameworks?.items.map((driver) => (
-                    <SelectItem
-                      key={driver.name}
-                      item={driver}
-                      borderBottom="1px solid #6e6e6e20"
-                    >
-                      {driver.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </SelectRoot>
-            )}
-          />
+              <option value={0}>Todos</option>
+              {drivers?.map((driver) => (
+                <option key={driver.id} value={driver.id}>
+                  {driver.name}
+                </option>
+              ))}
+            </select>
+          </div>
 
           <Button
             variant="solid"
@@ -150,16 +103,12 @@ const RideHistory: React.FC = () => {
       </div>
 
       <IfRender condition={!!data?.rides && data?.rides.length > 0}>
-        
         <MapRender
           items={data?.rides || []}
           key={data?.customerId}
-          render={(item: any, index) => (
-            <ListRides ride={item} key={index}   />
-          )}
+          render={(item: any, index) => <ListRides ride={item} key={index} />}
         />
-
-        </IfRender>
+      </IfRender>
     </>
   );
 };

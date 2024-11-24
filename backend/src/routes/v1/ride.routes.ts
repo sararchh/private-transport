@@ -236,4 +236,56 @@ rideRouter.get(
   rideController.find
 );
 
+/**
+ * @swagger
+ * /drivers/all:
+ *   get:
+ *     summary: Return all drivers
+ *     tags: [Rides]
+ *     responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                   name:
+ *                     type: string
+ *                   description:
+ *                     type: string
+ *                   vehicle:
+ *                     type: string
+ *                   rating:
+ *                     type: integer
+ *                   comment:
+ *                     type: string
+ *                   value:
+ *                     type: number
+ *                   min_km:
+ *                     type: integer
+ *       400:
+ *         description: INVALID_DATA
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *       404:
+ *         description: DRIVER_NOT_FOUND
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ */
+rideRouter.get("/drivers/all", rideController.findAllDrivers);
+
 export default rideRouter;

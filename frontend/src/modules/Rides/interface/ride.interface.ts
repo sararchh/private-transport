@@ -6,6 +6,11 @@ export type TFormValues = {
   customer_id: string;
 };
 
+export type TFormValuesHistory = {
+  customer_id: string;
+  driver: { items: { id: number; name: string, value: string }[] } | any;
+};
+
 export interface IRideParams {
   driver_id?: number;
 }
@@ -71,4 +76,15 @@ export interface IRideBody {
   duration: string;
   driver: { id: number; name: string };
   value: number;
+}
+
+export interface IDriver {
+  id: number;
+  name: string;
+  description: string;
+  vehicle: string;
+  rating: number;
+  comment: string;
+  value: number;
+  min_km: number;
 }

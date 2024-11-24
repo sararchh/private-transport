@@ -10,6 +10,8 @@ const getRides = async (customer_id: string, driver_id?: number) => {
     params["driver_id"] = driver_id;
   }
 
+  if(!customer_id) return [];
+
   const { data } = await api.get(
     apiConfig.routes.drivers.list + `/${customer_id}`,
     {
@@ -17,14 +19,13 @@ const getRides = async (customer_id: string, driver_id?: number) => {
     }
   );
 
-  return data.data;
+  return data;
 };
 
-export const useGetRides = (customer_id: string, driver_id: number) =>
+export const useGetRides = (customer_id: string, driver_id?: number, enabled: boolean = true) =>
   useQuery({
     queryKey: ["rides-list", customer_id, driver_id],
-    queryFn: () => getRides(customer_id, driver_id),
-    // onSettled: () => {
-    //   alert("Lista de motoristas carregada com sucesso!");
-    // }, 
+    queryFn: () => getRides(customer_id!, driver_id),
+    enabled,
+    retry: false
   });

@@ -4,7 +4,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import {
   IEstimateRide,
-  IRideLocalStorage,
 } from "@/modules/Rides/interface/ride.interface";
 
 const createEstimateRide = async (values: IEstimateRide) => {

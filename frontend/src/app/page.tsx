@@ -3,12 +3,14 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { HeaderWidgetLP } from "@/modules/LandingPage/ui/HeaderWidget/HeaderWidgetLP";
-import FormRide from "@/modules/Rides/ui/FormRide";
 
-import { IfRender, MapRender } from "@/utils/jsx";
+import { IfRender } from "@/utils/jsx";
 
 import { useRide } from "@/contexts/ride.context";
+
+import FormRide from "@/modules/Rides/ui/FormRide";
 import TravelOptions from "@/modules/Rides/ui/TravelOptions";
+import RideHistory from "@/modules/Rides/ui/RideHistory";
 
 export default function Home() {
   const { estimate } = useRide();
@@ -26,7 +28,7 @@ export default function Home() {
         </IfRender>
 
         <IfRender condition={estimate.step === 2}>
-          <p>Step 3</p>
+          <RideHistory/>
         </IfRender>
       </div>
       <ToastContainer />

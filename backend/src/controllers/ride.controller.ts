@@ -109,10 +109,31 @@ const find = async (req: Request, res: Response): Promise<Response> => {
   }
 };
 
+const findAllDrivers = async (req: Request, res: Response): Promise<Response> => {
+  try {
+    const data = await rideService.findAllDrivers();
+
+    return res.status(StatusCodes.OK).send(data);
+  } catch (error) {
+    if (error.error_code === "DRIVER_NOT_FOUND") {
+      return res.status(StatusCodes.NOT_FOUND).send(error);
+    }
+
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .send(
+        invalidDataError(
+          "Os dados fornecidos no corpo da requisição são inválidos"
+        )
+      );
+  }
+}
+
 const rideController = {
   estimate,
   confirm,
   find,
+  findAllDrivers
 };
 
 export default rideController;

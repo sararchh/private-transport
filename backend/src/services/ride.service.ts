@@ -123,10 +123,21 @@ async function find(
   };
 }
 
+async function findAllDrivers(): Promise<IDriver[]> {
+  const drivers = (await rideRepository.findDrivers()) as IDriver[];
+
+  if (!drivers || (Array.isArray(drivers) && drivers.length === 0)) {
+    throw notFoundDriver("Motoristas não encontrados");
+  }
+
+  return drivers;
+}
+
 const rideService = {
   estimate,
   confirm,
   find,
+  findAllDrivers,
 };
 
 export default rideService;

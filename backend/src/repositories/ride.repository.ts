@@ -60,7 +60,7 @@ async function findRides(
     `;
     let params: (string | number)[] = [customer_id];
 
-    if (typeof driver_id === 'number' && !isNaN(driver_id)) {
+    if (typeof driver_id === "number" && !isNaN(driver_id)) {
       query += ` AND rides.driver_id = ?`;
       params.push(driver_id);
     }
@@ -76,7 +76,7 @@ async function findRides(
           distance: row.distance,
           duration: row.duration,
           value: row.value,
-          date: row.createdAt, 
+          date: row.createdAt,
           driver: {
             id: row.driver_id,
             name: row.driver_name,
@@ -117,7 +117,7 @@ async function createRide(ride: IRideTable): Promise<void> {
 const rideRepository = {
   findDrivers,
   findRides,
-  createRide
+  createRide,
 };
 
 export default rideRepository;

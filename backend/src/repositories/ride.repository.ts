@@ -1,4 +1,5 @@
 import db from "@/db/sqlite.db";
+import moment from "moment-timezone";
 import { notFoundDriver, invalidRides } from "@/errors/ride.error";
 import { IDriver, IRideTable } from "@/ts/interfaces/ride.interface";
 
@@ -91,8 +92,8 @@ async function findRides(
 async function createRide(ride: IRideTable): Promise<void> {
   return new Promise((resolve, reject) => {
     const query = `
-      INSERT INTO rides (customer_id, origin, destination, distance, duration, driver_id, value)
-      VALUES (?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO rides (customer_id, origin, destination, distance, duration, driver_id, value, createdAt)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `;
     const params = [
       ride.customer_id,
@@ -102,6 +103,7 @@ async function createRide(ride: IRideTable): Promise<void> {
       ride.duration,
       ride.driver_id,
       ride.value,
+      moment.tz("America/Sao_Paulo").format("YYYY-MM-DD HH:mm:ss"),
     ];
 
     db.run(query, params, (err) => {

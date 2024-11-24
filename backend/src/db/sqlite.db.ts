@@ -89,7 +89,7 @@ export const initializeDatabase = () => {
         distance REAL NOT NULL,
         duration INTEGER NOT NULL,
         value REAL NOT NULL,
-        createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        createdAt DATETIME NOT NULL,
         driver_id INTEGER NOT NULL,
         FOREIGN KEY (driver_id) REFERENCES drivers (id)
       )

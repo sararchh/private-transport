@@ -1,0 +1,10 @@
+services:
+   node:
+      build: ./
+      image: taxi-frontend
+      ports:
+         - 80:3000
+      # environment:
+      # depends_on:
+      env_file:
+         - ./.env.local

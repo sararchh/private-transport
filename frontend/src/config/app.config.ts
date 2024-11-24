@@ -3,5 +3,5 @@ export const ConfigApp = {
   domain: "",
   description: "Busca Táxi é uma aplicação para solicitar corridas de taxi",
   keywords: "taxi, carona, transporte, viagem",
-  appUrl: "http://localhost:3000",
+  appUrl: "http://localhost:80",
 };

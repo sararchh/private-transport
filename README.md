@@ -58,3 +58,15 @@ Este projeto consiste no desenvolvimento do backend e frontend de uma aplicaçã
   ```
 
  ## Agora, o backend estará disponível na porta 8080 e o frontend na porta 80.
+
+## Rodando os Testes no Backend
+
+1. Navegue até o diretório do backend:
+  ```
+  cd backend
+  ```
+
+2. Execute os testes:
+  ```
+  pnpm test
+  ```

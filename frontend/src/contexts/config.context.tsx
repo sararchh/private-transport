@@ -1,7 +1,8 @@
 "use client";
 import { ConfigApp as configsApp } from "@/config/app.config";
 import { ConfigJSONProps } from "@/modules/Core/interface/config-app.type";
-//
+import { LoadingPageFull } from "@/modules/Core/ui/LoadingPageFull/LoadingPageFull";
+
 import { usePathname } from "next/navigation";
 import React, { useContext } from "react";
 
@@ -62,7 +63,7 @@ export function ConfigProvider({ children, ...rest }: ConfigProviderProps) {
       }}
     >
       <>
-        {loading && <div>Carregando...</div>}
+        {loading && <LoadingPageFull />}
         {!loading && children}
       </>
     </ConfigContext.Provider>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import { Button, Text } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -7,9 +7,23 @@ import InputCustom from "@/components/atoms/Input/Input";
 
 import { useGetDrivers } from "../http/client/useGetDrivers";
 import { useGetRides } from "../http/client/useGetRides";
-import { IDriver, IError, TFormValuesHistory } from "../interface/ride.interface";
+
+import { IDriver, IError, IRideBody, TFormValuesHistory } from "../interface/ride.interface";
+
 import { IfRender, MapRender } from "@/utils/jsx";
 import ListRides from "./widgets/ListRides";
+
+const ordernedData = (data: IRideBody[]) => {
+  return data.sort((a: IRideBody[][0], b: IRideBody[][0]) => {
+    if (a.date < b.date) {
+      return 1;
+    }
+    if (a.date > b.date) {
+      return -1;
+    }
+    return 0;
+  });
+};
 
 const RideHistory: React.FC = () => {
   const [customerId, setCustomerId] = useState("");
@@ -22,7 +36,7 @@ const RideHistory: React.FC = () => {
     isError,
     error,
   }: {
-    data: { customerId: string; rides: IDriver[] | undefined } | undefined;
+    data: { customerId: string; rides: IRideBody[] | undefined } | undefined;
     isError: boolean;
     error: IError | null | any;
   } = useGetRides(customerId, driverId, fetchRides);
@@ -32,6 +46,10 @@ const RideHistory: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<TFormValuesHistory>();
+
+  const dataOrdenated = useMemo(() => {
+    return ordernedData(data?.rides || []);
+  }, [data?.rides]);
 
   const onSubmit: SubmitHandler<TFormValuesHistory> = async (data) => {
     const driver_id = parseInt(data.driver_id);
@@ -104,9 +122,9 @@ const RideHistory: React.FC = () => {
 
       <IfRender condition={!!data?.rides && data?.rides.length > 0}>
         <MapRender
-          items={data?.rides || []}
+          items={dataOrdenated || []}
           key={data?.customerId}
-          render={(item: any, index) => <ListRides ride={item} key={index} />}
+          render={(item: IRideBody, index) => <ListRides ride={item} key={index} />}
         />
       </IfRender>
     </>

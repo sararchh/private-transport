@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   node:
     build: ./
@@ -11,8 +10,16 @@ services:
       - db
     env_file:
       - ./.env
+    networks:
+      - app-taxi
 
   db:
     image: nouchka/sqlite3
     volumes:
       - ./data:/data
+    networks:
+      - app-taxi
+      
+networks:
+  app-taxi:
+    driver: bridge

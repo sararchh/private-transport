@@ -8,3 +8,9 @@ services:
       # depends_on:
       env_file:
          - ./.env.local
+      networks:
+      - app-taxi
+
+networks:
+  app-taxi:
+    driver: bridge

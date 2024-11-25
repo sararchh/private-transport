@@ -6,3 +6,5 @@ dist
 yarn.lock
 .vscode
 coverage
+database.sqlite
+/database.sqlite

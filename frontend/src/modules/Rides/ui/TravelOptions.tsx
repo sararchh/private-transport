@@ -5,8 +5,6 @@ import { Box, Text } from "@chakra-ui/react";
 import ListDrivers from "./widgets/ListDrivers";
 import { convertDuration } from "@/utils/convert-duration";
 
-
-
 const TravelOptions: React.FC = () => {
   const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API_KEY as string;
   const { estimate } = useRide();

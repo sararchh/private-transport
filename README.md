@@ -19,9 +19,7 @@ Este projeto consiste no desenvolvimento do backend e frontend de uma aplicaçã
 
 ## Variáveis de Ambiente
  ```
- - No Frontend crie o `.env.local` informado a variável `NEXT_PUBLIC_GOOGLE_API_KEY=`;
-
- - No Backend crie `.env` informando a variável `GOOGLE_API_KEY=`;
+  - No diretório raiz crie o **.env** com a variável de ambiente **GOOGLE_API_KEY=**;
  ```
 
 ## Instalação Docker
@@ -35,29 +33,12 @@ Este projeto consiste no desenvolvimento do backend e frontend de uma aplicaçã
   cd private-transport
   ```
 
-3. Navegue até o diretório do backend:
+3. Construa e inicie os contêineres do backend e frontend:
   ```
-  cd backend
-  ```
-
-4. Construa e inicie os contêineres do backend:
-  ```
-  docker build -t taxi-backend .
-  docker-compose up
+  docker-compose up --build
   ```
 
-5. Em uma nova janela de terminal, navegue até o diretório do frontend:
-  ```
-  cd frontend
-  ```
-
-6. Construa e inicie os contêineres do frontend:
-  ```
-  docker build -t taxi-frontend .
-  docker-compose up
-  ```
-
- ## Agora, o backend estará disponível na porta 8080 e o frontend na porta 80.
+## Agora, o backend estará disponível na porta 8080 e o frontend na porta 80.
 
 ## Rodando os Testes no Backend
 

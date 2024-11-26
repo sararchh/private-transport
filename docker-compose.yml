@@ -1,0 +1,40 @@
+services:
+  node-frontend:
+    build:
+      context: ./frontend 
+      args:
+        NEXT_PUBLIC_GOOGLE_API_KEY: ${GOOGLE_API_KEY} 
+    image: taxi-frontend
+    ports:
+      - 80:3000
+    environment:
+      - NEXT_PUBLIC_GOOGLE_API_KEY=${GOOGLE_API_KEY}
+    env_file:
+      - .env
+    networks:
+      - app-taxi
+
+  node-backend:
+    build: ./backend
+    image: taxi-backend
+    ports:
+      - 8080:8080
+    environment:
+      - TZ=America/Sao_Paulo
+    depends_on:
+      - db
+    env_file:
+      - .env
+    networks:
+      - app-taxi
+
+  db:
+    image: nouchka/sqlite3
+    volumes:
+      - ./data:/data
+    networks:
+      - app-taxi
+
+networks:
+  app-taxi:
+    driver: bridge

@@ -24,7 +24,7 @@ const ListRides: React.FC<{ ride: IRideBody }> = ({ ride }) => {
         {ride.destination}
       </Text>
       <Text fontSize="sm" color="gray.500">
-        {ride.distance / 1000} km
+        {ride.distance} m
       </Text>
       <Text textStyle="sm" color="gray.500">
         {ride.duration ? convertDuration(ride.duration) : "N/A"}

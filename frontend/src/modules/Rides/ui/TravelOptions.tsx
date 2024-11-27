@@ -28,7 +28,7 @@ const TravelOptions: React.FC = () => {
         <Text textStyle="sm">
           Distância:{" "}
           {estimate.estimate?.distance
-            ? `${(estimate.estimate.distance / 1000).toFixed(2)} km`
+            ? `${estimate.estimate.distance} m`
             : "N/A"}
         </Text>
         <Text textStyle="sm">
